@@ -9,6 +9,7 @@ import (
 	"sync"
 	"time"
 
+	"github.com/ivikasavnish/scrapygo/management"
 	"github.com/ivikasavnish/scrapygo/spiders"
 )
 
@@ -29,13 +30,16 @@ func Run(worker *spiders.SpiderWorker) {
 }
 
 func main() {
+	go management.Routes()
 	worker := spiders.NewSpiderWorker()
 
 	worker.Load()
 	var wg sync.WaitGroup
+	wg.Add(1)
 
-	worker.Start(&wg)
+	// worker.Start(&wg)
 	wg.Wait()
+
 	// Loadfromcsv()
 
 }

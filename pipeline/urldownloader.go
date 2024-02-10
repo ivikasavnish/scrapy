@@ -25,11 +25,12 @@ func (u *URLService) Run() {
 
 	c.OnHTML("a", func(e *colly.HTMLElement) {
 		link := e.Attr("href")
+
 		// Print link
 		log.Println("Link found:", link)
 		// Visit link found on page
 		// Only those links are visited which are in AllowedDomains
-		// c.Visit(e.Request.AbsoluteURL(link))
+		c.Visit(e.Request.AbsoluteURL(link))
 	})
 
 	c.Visit(u.Link)
